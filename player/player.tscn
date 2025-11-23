@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://drckwtjlm651j"]
+[gd_scene load_steps=56 format=3 uid="uid://drckwtjlm651j"]
 
 [ext_resource type="Texture2D" uid="uid://du20bmdeuvob4" path="res://player/player.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://nmi4ip5jqi61" path="res://player/player.gd" id="1_rkbax"]
@@ -174,7 +174,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rgyib"]
 resource_name = "run_left"
-length = 0.5
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -184,10 +183,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [14, 14, 15, 16, 17, 13]
+"values": [13, 14, 15, 16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_yw30f"]
@@ -340,13 +339,13 @@ blend_mode = 1
 animation = &"run_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rgyib"]
-animation = &"run_left"
+animation = &"run_right"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg6s5"]
 animation = &"run_down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8t03j"]
-animation = &"run_right"
+animation = &"run_left"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_rkbax"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_boad6")
@@ -357,7 +356,6 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_hg6s5")
 blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_8t03j")
 blend_point_3/pos = Vector2(-0.90000004, 0)
-max_space = Vector2(0.6, 1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkbax"]
@@ -401,7 +399,7 @@ advance_expression = "input_vector.length() == 0.0"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yw30f"]
 states/RunState/node = SubResource("AnimationNodeBlendSpace2D_rkbax")
-states/RunState/position = Vector2(382.5, 206)
+states/RunState/position = Vector2(382, 206)
 states/StandState/node = SubResource("AnimationNodeBlendSpace2D_g1dw6")
 states/StandState/position = Vector2(381.5, 99.5)
 transitions = ["Start", "StandState", SubResource("AnimationNodeStateMachineTransition_g1dw6"), "StandState", "RunState", SubResource("AnimationNodeStateMachineTransition_yw30f"), "RunState", "StandState", SubResource("AnimationNodeStateMachineTransition_qjkh3")]
@@ -455,10 +453,18 @@ states/RollState/position = Vector2(416.0625, -1.0125427)
 transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_rkbax"), "MoveState", "AttackState", SubResource("AnimationNodeStateMachineTransition_g6k8r"), "AttackState", "MoveState", SubResource("AnimationNodeStateMachineTransition_boad6"), "MoveState", "RollState", SubResource("AnimationNodeStateMachineTransition_rgyib"), "RollState", "MoveState", SubResource("AnimationNodeStateMachineTransition_hg6s5")]
 graph_offset = Vector2(-239.64, 20.29237)
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_g1dw6"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_g1dw6"]
+nodes/output/position = Vector2(520, 130)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_rkbax")
 nodes/StateMachine/position = Vector2(20, 60)
-node_connections = [&"output", 0, &"StateMachine"]
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_g1dw6")
+nodes/TimeScale/position = Vector2(320, 60)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"StateMachine"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
+radius = 12.0415945
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-4, -2)
@@ -466,7 +472,7 @@ motion_mode = 1
 script = ExtResource("1_rkbax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(160, 85)
+position = Vector2(3, 2)
 texture = ExtResource("1_oul6g")
 hframes = 60
 frame = 28
@@ -477,25 +483,42 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_discrete = 1
 tree_root = SubResource("AnimationNodeBlendTree_g1dw6")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/AttackState/blend_position = Vector2(-0.90426457, -0.017857194)
-parameters/StateMachine/MoveState/RunState/blend_position = Vector2(0.008785605, -0.37946427)
+parameters/StateMachine/MoveState/RunState/blend_position = Vector2(-0.000874877, -0.97979796)
 parameters/StateMachine/MoveState/StandState/blend_position = Vector2(-0.32895887, -0.86607146)
 parameters/StateMachine/RollState/blend_position = Vector2(0, 0)
+parameters/TimeScale/scale = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(160, 92)
+position = Vector2(-5, -1)
 process_callback = 0
 position_smoothing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-45, -479)
-scale = Vector2(2.2187479, 4.999997)
-polygon = PackedVector2Array(92.394455, 111.60005, 95.09868, 113.00005, 92.394455, 114.60006, 90.14093, 112.80006)
+position = Vector2(-157, -95)
+rotation = 0.00026591303
+polygon = PackedVector2Array(160, 96, 156, 92, 161, 85, 166, 92, 162, 96, 162, 95, 162, 95, 160, 98)
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 show_behind_parent = true
-position = Vector2(160, 96)
+position = Vector2(3.7499995, 1.999999)
+scale = Vector2(1.2187499, 2.1999998)
 texture = ExtResource("3_g1dw6")
+
+[node name="Area2D" type="Area2D" parent="."]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
+position = Vector2(3, 4)
+shape = SubResource("CircleShape2D_g1dw6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-45, -479)
+rotation = -0.008095793
+scale = Vector2(2.2187479, 4.999997)
+polygon = PackedVector2Array(48.859035, 67.02518, 48.333668, 66.09265, 51.485863, 66.09265, 51.748547, 66.44235, 49.909767, 66.79204, 49.909767, 67.37487, 49.3844, 67.02518)
