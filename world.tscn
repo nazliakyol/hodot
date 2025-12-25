@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c4iopj2x7jlw5"]
+[gd_scene load_steps=10 format=4 uid="uid://c4iopj2x7jlw5"]
 
 [ext_resource type="PackedScene" uid="uid://drckwtjlm651j" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bi61nln2tgoky" path="res://world/grass_background.png" id="1_fj7yv"]
@@ -6,8 +6,9 @@
 [ext_resource type="TileSet" uid="uid://dgd8vrja4yt2t" path="res://world/cliff_tileset.tres" id="3_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c1d7ef7xwldfr" path="res://world/bush.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c6sw5enqpojqq" path="res://world/tree.tscn" id="4_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://b0jbtsxvyw0tf" path="res://world/grass.png" id="4_pkg7o"]
-[ext_resource type="Script" uid="uid://c4ia8dmk71k5c" path="res://world/grass.gd" id="8_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://dqyvo6nrni1am" path="res://world/grass.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://cw0wvgang1o7s" path="res://effects/grass_effect.tscn" id="8_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://ur7sskco1utb" path="res://enemies/brian_the_bat.tscn" id="9_ioo17"]
 
 [node name="World" type="Node2D"]
 position = Vector2(878, 582)
@@ -22,9 +23,9 @@ repeat_size = Vector2(320, 192)
 
 [node name="GrassBackground" type="TextureRect" parent="GroundLayer/Parallax2D"]
 offset_left = -910.0
-offset_top = -802.0
+offset_top = -803.0
 offset_right = 230.0
-offset_bottom = -53.0
+offset_bottom = -54.0
 texture = ExtResource("1_fj7yv")
 stretch_mode = 1
 
@@ -66,40 +67,51 @@ position = Vector2(-214, -326)
 position = Vector2(-400, -344)
 
 [node name="Tree4" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(-407, -442)
+position = Vector2(-429, -432)
 
 [node name="Tree5" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(-354, -317)
 
-[node name="Grass" type="Sprite2D" parent="."]
-position = Vector2(-365, -453)
-texture = ExtResource("4_pkg7o")
-script = ExtResource("8_gbfbk")
+[node name="Grass" parent="." instance=ExtResource("7_pkg7o")]
 
-[node name="Grass2" type="Sprite2D" parent="."]
-position = Vector2(-349, -454)
-texture = ExtResource("4_pkg7o")
+[node name="Grass2" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(1357.2684, 674.6968)
+rotation = 3.1415927
 
-[node name="Grass3" type="Sprite2D" parent="."]
-position = Vector2(-365, -437)
-texture = ExtResource("4_pkg7o")
+[node name="Grass3" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-382, -487)
 
-[node name="Grass4" type="Sprite2D" parent="."]
-position = Vector2(-349, -438)
-texture = ExtResource("4_pkg7o")
+[node name="Grass4" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-382, -470)
 
-[node name="Grass5" type="Sprite2D" parent="."]
-position = Vector2(-428, -345)
-texture = ExtResource("4_pkg7o")
+[node name="Grass5" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-428, -344)
 
-[node name="Grass6" type="Sprite2D" parent="."]
-position = Vector2(-173, -486)
-texture = ExtResource("4_pkg7o")
+[node name="Grass6" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-330, -327)
 
-[node name="Grass7" type="Sprite2D" parent="."]
-position = Vector2(-157, -471)
-texture = ExtResource("4_pkg7o")
+[node name="Grass7" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-330, -311)
 
-[node name="Grass8" type="Sprite2D" parent="."]
-position = Vector2(-173, -470)
-texture = ExtResource("4_pkg7o")
+[node name="Grass8" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-314, -311)
+
+[node name="Grass9" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-313, -327)
+
+[node name="Grass10" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-399, -487)
+
+[node name="Grass11" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-399, -471)
+
+[node name="GrassEffect" parent="." instance=ExtResource("8_gbfbk")]
+position = Vector2(-365, -420)
+
+[node name="BrianTheBat" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
+position = Vector2(-420, -377)
+player = NodePath("../Player")
+
+[node name="BrianTheBat2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_ioo17")]
+position = Vector2(-297, -415)
+player = NodePath("../Player")
