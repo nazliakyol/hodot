@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c4iopj2x7jlw5"]
+[gd_scene load_steps=11 format=4 uid="uid://c4iopj2x7jlw5"]
 
 [ext_resource type="PackedScene" uid="uid://drckwtjlm651j" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bi61nln2tgoky" path="res://world/grass_background.png" id="1_fj7yv"]
@@ -9,23 +9,24 @@
 [ext_resource type="PackedScene" uid="uid://dqyvo6nrni1am" path="res://world/grass.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://cw0wvgang1o7s" path="res://effects/grass_effect.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://ur7sskco1utb" path="res://enemies/brian_the_bat.tscn" id="9_ioo17"]
+[ext_resource type="PackedScene" uid="uid://d0qaeffu4s4sr" path="res://ui/hearts_ui.tscn" id="10_wse8f"]
 
 [node name="World" type="Node2D"]
-position = Vector2(878, 582)
+position = Vector2(919, 584)
 
 [node name="GroundLayer" type="Node2D" parent="."]
 z_index = -10
-position = Vector2(0, -1)
+position = Vector2(1, -84)
 
 [node name="Parallax2D" type="Parallax2D" parent="GroundLayer"]
 scroll_offset = Vector2(172, -67)
 repeat_size = Vector2(320, 192)
 
 [node name="GrassBackground" type="TextureRect" parent="GroundLayer/Parallax2D"]
-offset_left = -910.0
-offset_top = -803.0
-offset_right = 230.0
-offset_bottom = -54.0
+offset_left = -778.0
+offset_top = -830.0
+offset_right = 362.0
+offset_bottom = -81.0
 texture = ExtResource("1_fj7yv")
 stretch_mode = 1
 
@@ -40,7 +41,7 @@ tile_map_data = PackedByteArray("AADu//P/AAAAAAMAAADv//P/AAABAAMAAADw//P/AAAHAAM
 tile_set = ExtResource("3_pkg7o")
 
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
-position = Vector2(-347, -393)
+position = Vector2(-310, -445)
 
 [node name="Bush" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(-295, -462)
@@ -73,16 +74,17 @@ position = Vector2(-429, -432)
 position = Vector2(-354, -317)
 
 [node name="Grass" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(74, -173)
 
 [node name="Grass2" parent="." instance=ExtResource("7_pkg7o")]
 position = Vector2(1357.2684, 674.6968)
 rotation = 3.1415927
 
 [node name="Grass3" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-382, -487)
+position = Vector2(-380, -569)
 
 [node name="Grass4" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-382, -470)
+position = Vector2(-381, -552)
 
 [node name="Grass5" parent="." instance=ExtResource("7_pkg7o")]
 position = Vector2(-428, -344)
@@ -100,10 +102,10 @@ position = Vector2(-314, -311)
 position = Vector2(-313, -327)
 
 [node name="Grass10" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-399, -487)
+position = Vector2(-398, -569)
 
 [node name="Grass11" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-399, -471)
+position = Vector2(-398, -553)
 
 [node name="GrassEffect" parent="." instance=ExtResource("8_gbfbk")]
 position = Vector2(-365, -420)
@@ -113,3 +115,9 @@ position = Vector2(-446, -406)
 
 [node name="BrianTheBat2" parent="." instance=ExtResource("9_ioo17")]
 position = Vector2(-218, -423)
+
+[node name="HeartsUI" parent="." instance=ExtResource("10_wse8f")]
+offset_left = -559.0
+offset_top = -629.0
+offset_right = -519.0
+offset_bottom = -589.0
